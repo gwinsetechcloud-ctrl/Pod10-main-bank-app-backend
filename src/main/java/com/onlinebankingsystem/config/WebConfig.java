@@ -20,7 +20,7 @@ public class WebConfig {
     private static final Long MAX_AGE = 3600L;
     private static final int CORS_FILTER_ORDER = -102;
 
-    @Value("${cors.allowed-origin:https://bank.gwinseapptest.online}")
+    @Value("${cors.allowed-origin:https://bank.cohort5pod10.online}")
     private String corsAllowedOrigin;
 
     @Bean
