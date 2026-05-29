@@ -30,12 +30,8 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.run_number }}
         run: |
-          docker build \
-            -t ${{ vars.ECR_REPO }}/${{ env.ECR_REPOSITORY }}:${IMAGE_TAG} \
-            -t ${{ vars.ECR_REPO }}/${{ env.ECR_REPOSITORY }}:latest \
-            .
+          docker build -t ${{ vars.ECR_REPO }}/${{ env.ECR_REPOSITORY }}:${IMAGE_TAG} .
           docker push ${{ vars.ECR_REPO }}/${{ env.ECR_REPOSITORY }}:${IMAGE_TAG}
-          docker push ${{ vars.ECR_REPO }}/${{ env.ECR_REPOSITORY }}:latest
 
   update-k8s-manifest:
     runs-on: ubuntu-latest
