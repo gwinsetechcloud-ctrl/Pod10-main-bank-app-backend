@@ -2,7 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: bank-backend-config
+  namespace: bank-app
 data:
-  DB_HOST: "34.27.23.176"
+  DB_HOST: "REPLACE_WITH_RDS_ENDPOINT"
   DB_PORT: "3306"
-  DB_NAME: "online_banking_system"
+  DB_NAME: "pod10fintech_db"
+  CORS_ALLOWED_ORIGIN: "https://bank.gwinseapptest.online"

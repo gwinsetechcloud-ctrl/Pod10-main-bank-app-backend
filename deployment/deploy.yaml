@@ -1,9 +1,11 @@
+# Reference copy — canonical manifests: Pod10-infrastructure-main/k8s/bank-app/
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bank-backend-deployment
+  namespace: bank-app
 spec:
-  replicas: 1  # Adjust as necessary
+  replicas: 1
   selector:
     matchLabels:
       app: bank-backend
@@ -14,9 +16,9 @@ spec:
     spec:
       containers:
       - name: bank-backend-container
-        image: supportcloud160/bank-app-backend:b219162  # Replace this with your Docker image name
+        image: REPLACE_ECR_REGISTRY/bank-backendapi:latest
         ports:
-        - containerPort: 8080  # Replace with your app's port if necessary
+        - containerPort: 8080
         env:
         - name: DB_HOST
           valueFrom:
@@ -33,7 +35,11 @@ spec:
             configMapKeyRef:
               name: bank-backend-config
               key: DB_NAME
-              
+        - name: CORS_ALLOWED_ORIGIN
+          valueFrom:
+            configMapKeyRef:
+              name: bank-backend-config
+              key: CORS_ALLOWED_ORIGIN
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
@@ -44,4 +50,3 @@ spec:
             secretKeyRef:
               name: bank-backend-secret
               key: DB_PASSWORD
-
